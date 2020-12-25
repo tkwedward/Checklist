@@ -28,9 +28,10 @@
                                                     <rect key="frame" x="20" y="9" width="374" height="34"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                                     <connections>
                                                         <action selector="done" destination="pdH-YH-xCJ" eventType="editingDidEndOnExit" id="lM7-fW-krz"/>
+                                                        <outlet property="delegate" destination="pdH-YH-xCJ" id="qJe-90-40k"/>
                                                     </connections>
                                                 </textField>
                                             </subviews>
@@ -50,13 +51,14 @@
                                 <action selector="cancel" destination="pdH-YH-xCJ" id="NAc-gq-Mjw"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Done" id="h8s-fh-Arg">
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" title="Done" id="h8s-fh-Arg">
                             <connections>
                                 <action selector="done" destination="pdH-YH-xCJ" id="JZf-FK-dCD"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="doneBarButton" destination="h8s-fh-Arg" id="VHk-48-TK0"/>
                         <outlet property="textField" destination="ONd-Og-qA4" id="ejt-1F-Iw6"/>
                     </connections>
                 </tableViewController>
