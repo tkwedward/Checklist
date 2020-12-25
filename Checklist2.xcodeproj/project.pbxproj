@@ -14,6 +14,7 @@
 		228EAF412595DA5400449F78 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 228EAF402595DA5400449F78 /* Assets.xcassets */; };
 		228EAF442595DA5400449F78 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 228EAF422595DA5400449F78 /* LaunchScreen.storyboard */; };
 		228EAF4C2595E71B00449F78 /* ChecklistItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228EAF4B2595E71B00449F78 /* ChecklistItem.swift */; };
+		228EAF4E2595F00500449F78 /* AddItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228EAF4D2595F00500449F78 /* AddItemViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		228EAF432595DA5400449F78 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		228EAF452595DA5400449F78 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		228EAF4B2595E71B00449F78 /* ChecklistItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChecklistItem.swift; sourceTree = "<group>"; };
+		228EAF4D2595F00500449F78 /* AddItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +68,7 @@
 				228EAF422595DA5400449F78 /* LaunchScreen.storyboard */,
 				228EAF452595DA5400449F78 /* Info.plist */,
 				228EAF4B2595E71B00449F78 /* ChecklistItem.swift */,
+				228EAF4D2595F00500449F78 /* AddItemViewController.swift */,
 			);
 			path = Checklist2;
 			sourceTree = "<group>";
@@ -141,6 +144,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				228EAF4E2595F00500449F78 /* AddItemViewController.swift in Sources */,
 				228EAF3C2595DA5200449F78 /* ChecklistViewController.swift in Sources */,
 				228EAF382595DA5200449F78 /* AppDelegate.swift in Sources */,
 				228EAF3A2595DA5200449F78 /* SceneDelegate.swift in Sources */,
