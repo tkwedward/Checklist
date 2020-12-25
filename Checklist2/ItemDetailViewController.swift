@@ -44,7 +44,7 @@ class ItemDetailViewController: UITableViewController, UITextFieldDelegate {
             let item = ChecklistItem()
             item.text = textField.text!
             print("Contents of the text field: \(textField.text!)")
-            delegate?.addItemViewController(self, didFinishEditing: item)
+            delegate?.addItemViewController(self, didFinishAdding: item)
         }
     }
     
