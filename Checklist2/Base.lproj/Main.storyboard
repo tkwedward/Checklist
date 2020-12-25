@@ -101,7 +101,7 @@
                     <navigationItem key="navigationItem" title="Checklist" id="26R-kC-p0Z">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="otd-Vh-kpL">
                             <connections>
-                                <segue destination="pdH-YH-xCJ" kind="show" id="dzU-2n-e1b"/>
+                                <segue destination="pdH-YH-xCJ" kind="show" identifier="AddItem" id="dzU-2n-e1b"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
