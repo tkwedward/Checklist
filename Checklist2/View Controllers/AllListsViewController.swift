@@ -35,6 +35,7 @@ class AllListsViewController: UITableViewController, ListDetailViewControllerDel
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        // to generate a new cell
         let cell: UITableViewCell!
         if let c = tableView.dequeueReusableCell(withIdentifier: cellIdentifier){
             cell = c
@@ -53,6 +54,7 @@ class AllListsViewController: UITableViewController, ListDetailViewControllerDel
             cell.detailTextLabel!.text = count == 0 ? "All Done": "\(count) Remaining"
         }
         
+        cell.imageView!.image = UIImage(named: checklist.iconName)
         return cell
     }
     
@@ -86,22 +88,15 @@ class AllListsViewController: UITableViewController, ListDetailViewControllerDel
     }
     
    func listDetailViewController(_ controller: ListDetailViewController, didFinishAdding checklist: Checklist) {
-        let newRowIndex = self.dataModel.lists.count
         self.dataModel.lists.append(checklist)
-        let indexPath = IndexPath(row: newRowIndex, section: 0)
-        let indexPaths = [indexPath]
-        tableView.insertRows(at: indexPaths, with: .automatic)
+        self.dataModel.sortChecklists()
+        tableView.reloadData()
         navigationController?.popViewController(animated: true)
     }
     
     func listDetailViewController(_ controller: ListDetailViewController, didFinishEditing checklist: Checklist) {
-        if let index = self.dataModel.lists.firstIndex(of: checklist){
-            let indexPath = IndexPath(row: index, section: 0)
-            if let cell = self.tableView.cellForRow(at: indexPath){
-                cell.textLabel!.text = checklist.name
-            }
-        }
-        
+        self.dataModel.sortChecklists()
+        self.tableView.reloadData()
         navigationController?.popViewController(animated: true)
     }
     

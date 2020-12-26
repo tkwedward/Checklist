@@ -10,6 +10,14 @@ import Foundation
 
 class DataModel {
     var lists = [Checklist]()
+    var indexOfSelectedChecklist: Int {
+        get {
+            return UserDefaults.standard.integer(forKey: "ChecklistIndex")
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: "ChecklistIndex")
+        }
+    }
     
     init(){
         loadChecklists()
@@ -63,19 +71,20 @@ class DataModel {
             let decoder = PropertyListDecoder()
             do {
                 lists = try decoder.decode([Checklist].self, from: data)
+                self.sortChecklists()
             } catch {
                 print("Error decoding item array: \(error.localizedDescription)")
             }
         }
     }
     
-    var indexOfSelectedChecklist: Int {
-        get {
-            return UserDefaults.standard.integer(forKey: "ChecklistIndex")
-        }
-        set {
-            UserDefaults.standard.set(newValue, forKey: "ChecklistIndex")
-        }
+    func sortChecklists(){
+        lists.sort(by: { list1, list2 in
+            return list1.name.localizedStandardCompare(list2.name) == .orderedAscending
+            
+        })
     }
+    
+    
     
 }
