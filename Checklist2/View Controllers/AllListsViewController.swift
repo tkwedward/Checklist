@@ -15,7 +15,6 @@ class AllListsViewController: UITableViewController, ListDetailViewControllerDel
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.prefersLargeTitles = true
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: self.cellIdentifier)
         print(self.dataModel.documentsDirectory())
     }
 
@@ -36,10 +35,24 @@ class AllListsViewController: UITableViewController, ListDetailViewControllerDel
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: self.cellIdentifier, for : indexPath)
+        let cell: UITableViewCell!
+        if let c = tableView.dequeueReusableCell(withIdentifier: cellIdentifier){
+            cell = c
+        } else {
+            cell = UITableViewCell(style: .subtitle, reuseIdentifier: cellIdentifier)
+        }
+        
         let checklist = self.dataModel.lists[indexPath.row]
+        let count = checklist.countUncheckedItems()
         cell.textLabel!.text = checklist.name
         cell.accessoryType = .detailDisclosureButton
+        
+        if checklist.items.count == 0 {
+            cell.detailTextLabel!.text = "(No items)"
+        } else {
+            cell.detailTextLabel!.text = count == 0 ? "All Done": "\(count) Remaining"
+        }
+        
         return cell
     }
     
@@ -107,5 +120,10 @@ class AllListsViewController: UITableViewController, ListDetailViewControllerDel
             let checklist = dataModel.lists[index]
             performSegue(withIdentifier: "ShowChecklist", sender: checklist)
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool){
+        super.viewWillAppear(animated)
+        tableView.reloadData()
     }
 }
