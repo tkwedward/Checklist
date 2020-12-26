@@ -191,10 +191,14 @@
                     <navigationItem key="navigationItem" title="Add Checklist" largeTitleDisplayMode="never" id="mVM-We-GXG">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="m2F-E2-7M9">
                             <connections>
-                                <action selector="cancel" destination="cyK-RB-M7P" id="zI9-rI-32p"/>
+                                <action selector="cancel" destination="cyK-RB-M7P" id="j4t-vv-rDV"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" enabled="NO" systemItem="done" id="7OM-yG-WJq"/>
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" systemItem="done" id="7OM-yG-WJq">
+                            <connections>
+                                <action selector="done" destination="cyK-RB-M7P" id="MKU-Oy-AYR"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="doneBarButton" destination="7OM-yG-WJq" id="bQB-za-hr1"/>
