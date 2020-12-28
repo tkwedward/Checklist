@@ -57,6 +57,9 @@
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="yU3-Fu-LRc">
                                                     <rect key="frame" x="343" y="6" width="51" height="31"/>
+                                                    <connections>
+                                                        <action selector="shouldRemindToggle:" destination="pdH-YH-xCJ" eventType="valueChanged" id="OoB-k0-jUL"/>
+                                                    </connections>
                                                 </switch>
                                             </subviews>
                                             <constraints>
@@ -131,6 +134,9 @@
                         <subviews>
                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="S6e-mi-bTC">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="217"/>
+                                <connections>
+                                    <action selector="dateChanged:" destination="pdH-YH-xCJ" eventType="valueChanged" id="tHq-xl-Qaf"/>
+                                </connections>
                             </datePicker>
                         </subviews>
                         <constraints>

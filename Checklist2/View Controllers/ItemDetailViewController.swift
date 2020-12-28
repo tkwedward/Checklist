@@ -40,8 +40,12 @@ class ItemDetailViewController: UITableViewController, UITextFieldDelegate {
         }
         updateDueDateLabel()
     }
-
     
+    override func viewWillAppear(_ animated: Bool){
+        super.viewWillAppear(animated)
+        textField.becomeFirstResponder()
+    }
+
     @IBAction func cancel(){
         delegate?.addItemViewControllerDidCancel(self)
     }
@@ -51,6 +55,7 @@ class ItemDetailViewController: UITableViewController, UITextFieldDelegate {
             item.text = textField.text!
             item.shouldRemind = shouldRemindSwitch.isOn
             item.dueDate = dueDate
+            item.scheduleNotification()
             delegate?.addItemViewController(self, didFinishEditing: item)
         } else {
             let item = ChecklistItem()
@@ -59,8 +64,25 @@ class ItemDetailViewController: UITableViewController, UITextFieldDelegate {
             
             item.shouldRemind = shouldRemindSwitch.isOn
             item.dueDate = dueDate
-            print("Contents of the text field: \(textField.text!)")
+            item.scheduleNotification()
             delegate?.addItemViewController(self, didFinishAdding: item)
+        }
+    }
+    
+    @IBAction func dateChanged(_ dataPicker: UIDatePicker){
+        dueDate = datePicker.date
+        self.updateDueDateLabel()
+    }
+    
+    @IBAction func shouldRemindToggle(_ switchControl: UISwitch){
+        textField.resignFirstResponder()
+        
+        if switchControl.isOn {
+            let center = UNUserNotificationCenter.current()
+            center.requestAuthorization(options: [.alert, .sound]){
+                grant, error in
+                    
+            }
         }
     }
     
@@ -82,6 +104,7 @@ class ItemDetailViewController: UITableViewController, UITextFieldDelegate {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        // Returns a cell to insert in a particular location of the table view.
         if indexPath.section == 1 && indexPath.row == 2 {
             return datePickerCell
         } else {
@@ -122,15 +145,13 @@ class ItemDetailViewController: UITableViewController, UITextFieldDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         textField.resignFirstResponder()
         if indexPath.section == 1 && indexPath.row == 1 {
-            showDatePicker()
+            if !datePickerVisible {
+                showDatePicker()
+            } else {
+                hideDatePicker()
+            }
         }
     }
-    
-    override func viewWillAppear(_ animated: Bool){
-        super.viewWillAppear(animated)
-        textField.becomeFirstResponder()
-    }
-    
     
     func updateDueDateLabel() {
         let formatter = DateFormatter()
@@ -143,5 +164,21 @@ class ItemDetailViewController: UITableViewController, UITextFieldDelegate {
         datePickerVisible = true
         let indexPathDatePicker = IndexPath(row:2, section: 1)
         tableView.insertRows(at: [indexPathDatePicker], with: .fade)
+        datePicker.setDate(dueDate, animated: false)
+        dueDateLabel.textColor = dueDateLabel.tintColor
     }
+    
+    func hideDatePicker(){
+        if datePickerVisible {
+            self.datePickerVisible = false
+            let indexPathDatePicker = IndexPath(row: 2, section: 1)
+            tableView.deleteRows(at: [indexPathDatePicker], with: .fade)
+            self.dueDateLabel.textColor = UIColor.black
+        }
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField){
+        self.hideDatePicker()
+    }
+    
 }
